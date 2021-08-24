@@ -1,5 +1,3 @@
-# peer-graded-final-assignment
-
 # Import required libraries
 import pandas as pd
 import dash
@@ -77,9 +75,8 @@ app.layout = html.Div(children=[
                                 # TASK1: Add title to the dashboard
                                 # Enter your code below. Make sure you have correct formatting.
 
-                                txt = "US Domestic Airline Flights Performance"
-                                x = txt.title()
-                                style={'textAlign': 'center', 'color': '#503D36', 'font-size': 24}
+                                title="US Domestic Airline Flights Performance",
+                                style={'textAlign': 'center', 'color': '#503D36', 'font-size': '24px'}]
     
                                 # REVIEW2: Dropdown creation
                                 # Create an outer division 
@@ -97,11 +94,12 @@ app.layout = html.Div(children=[
 
                                         dcc.Dropdown(id='input-type',
                                                           options=[
-                                                                  {'label': 'Yearly Airline Preformance Report', 'value': 'OPT1'},
-                                                                  {'lable': 'Yearly Airline Delay Report', 'value': 'OPT2'}
+                                                                  {'label': 'Yearly Airline Performance Report', 'value': 'OPT1'},
+                                                                  {'label': 'Yearly Airline Delay Report', 'value': 'OPT2'}
                                                                   ],
                                                           placeholder='Select a report type',
                                                           style={'width': '80%', 'padding': '3px', 'font-size': '20px', 'text-align-last': 'center'})
+                                                          ])
                                         
                                     # Place them next to each other using the division style
                                     ], style={'display':'flex'}),
@@ -134,12 +132,10 @@ app.layout = html.Div(children=[
                                 
                                 # TASK3: Add a division with two empty divisions inside. See above disvision for example.
                                 # Enter your code below. Make sure you have correct formatting.
-
-                                html.Div([ ], id='plot1'),
-
+                                
                                 html.Div([
-                                        html.Div([ ], 'plot4'),
-                                        html.Div([ ], 'plot5')
+                                        html.Div[ ], 'plot4'),
+                                        html.Div[ ], 'plot5')
                                 ], style={'display': 'flex'},
                                 ])
                                
@@ -148,7 +144,11 @@ app.layout = html.Div(children=[
 # Callback function definition
 # TASK4: Add 5 ouput components
 # Enter your code below. Make sure you have correct formatting.
-@app.callback( [....],
+@app.callback( [Output(component_id='plot1', component_property='children'),
+                Output(component_id='plot2', component_property='children'),
+                Output(component_id='plot3', component_property='children'),
+                Output(component_id='plot4', component_property='children'),
+                Output(component_id='plot5', component_property='children')],
                [Input(component_id='input-type', component_property='value'),
                 Input(component_id='input-year', component_property='value')],
                # REVIEW4: Holding output state till user enters all the form information. In this case, it will be chart type and year
@@ -156,11 +156,6 @@ app.layout = html.Div(children=[
                 State("plot3", "children"), State("plot4", "children"),
                 State("plot5", "children")
                ])
-               [Output(component_id='plot1', component_property='children'),
-                Output(component_id='plot2', component_property='children'),
-                Output(component_id='plot3', component_property='children'),
-                Output(component_id='plot4', component_property='children'),
-                Output(component_id='plot5', component_property='children')]
 # Add computation to callback function and return graph
 def get_graph(chart, year, children1, children2, c3, c4, c5):
       
@@ -176,10 +171,9 @@ def get_graph(chart, year, children1, children2, c3, c4, c5):
             
             # TASK5: Average flight time by reporting airline
             # Enter your code below. Make sure you have correct formatting.
-
+            
             line_fig = px.line(line_data, x='month', y='AirTime', color='Reporting_Airline', title='Average monthly flight time (minutes) by airline')
-            
-            
+
             # Percentage of diverted airport landings per reporting airline
             pie_fig = px.pie(div_data, values='Flights', names='Reporting_Airline', title='% of flights by reporting airline')
             
@@ -198,15 +192,12 @@ def get_graph(chart, year, children1, children2, c3, c4, c5):
             # TASK6: Number of flights flying to each state from each reporting airline
             # Enter your code below. Make sure you have correct formatting.
 
-            tree_fig = px.treemap(tree_data, path=['DestState', 'Reporting_Airline']
-            ,
-                                  values='Flights',
+            tree_fig = px.treemap(tree_data, path=['DestState', 'Reporting_Airline'],
+                                  Values='Flights',
                                   color='Flights',
-                                  color_continous_scale='RdBu',
-                                  title='Flight count by airline to destination state')
-            
-            
-            
+                                  color_continuous_scale='RdBu',
+                                  title='Flight count by airline to destination state') 
+
             # REVIEW6: Return dcc.Graph component to the empty division
             return [dcc.Graph(figure=tree_fig), 
                     dcc.Graph(figure=pie_fig),
