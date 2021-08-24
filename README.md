@@ -71,13 +71,12 @@ def compute_data_choice_2(df):
 
 
 # Application layout
-app.layout = html.Div(children=[ 
+app.layout = html.Div(children=[ html.H1('US Domestic Airline Flights Performance',
+                                style={'textAlign': 'center', 'color': '#503D36', 'font-size': 24}],
+
                                 # TASK1: Add title to the dashboard
                                 # Enter your code below. Make sure you have correct formatting.
 
-                                title="US Domestic Airline Flights Performance",
-                                style={'textAlign': 'center', 'color': '#503D36', 'font-size': '24px'}]
-    
                                 # REVIEW2: Dropdown creation
                                 # Create an outer division 
                                 html.Div([
