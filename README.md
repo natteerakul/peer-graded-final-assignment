@@ -150,8 +150,8 @@ app.layout = html.Div(children=[ html.H1('US Domestic Airline Flights Performanc
                # REVIEW4: Holding output state till user enters all the form information. In this case, it will be chart type and year
                [State("plot1", 'children'), State("plot2", "children"),
                 State("plot3", "children"), State("plot4", "children"),
-                State("plot5", "children")])
-
+                State("plot5", "children")
+               ])
 # Add computation to callback function and return graph
 def get_graph(chart, year, children1, children2, c3, c4, c5):
       
@@ -189,11 +189,10 @@ def get_graph(chart, year, children1, children2, c3, c4, c5):
             # Enter your code below. Make sure you have correct formatting.
             
             tree_fig = px.treemap(tree_data, path=['DestState', 'Reporting_Airline'],
-                                  Values='Flights',
+                                  values='Flights',
                                   color='Flights',
                                   color_continuous_scale='RdBu',
                                   title='Flight count by airline to destination state') 
-
             
             # REVIEW6: Return dcc.Graph component to the empty division
             return [dcc.Graph(figure=tree_fig), 
