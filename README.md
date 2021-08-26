@@ -71,12 +71,12 @@ def compute_data_choice_2(df):
 
 
 # Application layout
-app.layout = html.Div(children=[html.H1('US Domestic Airline Flights Performance', 
-                                       style={'textAlign': 'Center', 'color': '#503D36', 'font-size': 24}),
+app.layout = html.Div(children=[ html.H1('US Domestic Airline Flights Performance',
+                                style={'textAlign': 'center', 'color': '#503D36', 'font-size': '24px'}),
 
                                 # TASK1: Add title to the dashboard
                                 # Enter your code below. Make sure you have correct formatting.
-
+    
                                 # REVIEW2: Dropdown creation
                                 # Create an outer division 
                                 html.Div([
@@ -98,7 +98,7 @@ app.layout = html.Div(children=[html.H1('US Domestic Airline Flights Performance
                                                                   ],
                                                           placeholder='Select a report type',
                                                           style={'width': '80%', 'padding': '3px', 'font-size': '20px', 'text-align-last': 'center'})
-                                                          ])
+
                                         
                                     # Place them next to each other using the division style
                                     ], style={'display':'flex'}),
@@ -131,19 +131,16 @@ app.layout = html.Div(children=[html.H1('US Domestic Airline Flights Performance
                                 
                                 # TASK3: Add a division with two empty divisions inside. See above disvision for example.
                                 # Enter your code below. Make sure you have correct formatting.
-                                
+
                                 html.Div([
-                                        html.Div[ ], 'plot4'),
-                                        html.Div[ ], 'plot5')
+                                        html.Div([ ], id='plot4'),
+                                        html.Div([ ], id='plot5')
                                 ], style={'display': 'flex'},
-                                ])
-                               
-                                ])
 
 # Callback function definition
 # TASK4: Add 5 ouput components
 # Enter your code below. Make sure you have correct formatting.
-@app.callback( [Output(component_id='plot1', component_property='children'),
+app.callback( [Output(component_id='plot1', component_property='children'),
                 Output(component_id='plot2', component_property='children'),
                 Output(component_id='plot3', component_property='children'),
                 Output(component_id='plot4', component_property='children'),
@@ -153,8 +150,8 @@ app.layout = html.Div(children=[html.H1('US Domestic Airline Flights Performance
                # REVIEW4: Holding output state till user enters all the form information. In this case, it will be chart type and year
                [State("plot1", 'children'), State("plot2", "children"),
                 State("plot3", "children"), State("plot4", "children"),
-                State("plot5", "children")
-               ])
+                State("plot5", "children")])
+
 # Add computation to callback function and return graph
 def get_graph(chart, year, children1, children2, c3, c4, c5):
       
@@ -190,13 +187,14 @@ def get_graph(chart, year, children1, children2, c3, c4, c5):
             
             # TASK6: Number of flights flying to each state from each reporting airline
             # Enter your code below. Make sure you have correct formatting.
-
+            
             tree_fig = px.treemap(tree_data, path=['DestState', 'Reporting_Airline'],
                                   Values='Flights',
                                   color='Flights',
                                   color_continuous_scale='RdBu',
                                   title='Flight count by airline to destination state') 
 
+            
             # REVIEW6: Return dcc.Graph component to the empty division
             return [dcc.Graph(figure=tree_fig), 
                     dcc.Graph(figure=pie_fig),
