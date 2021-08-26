@@ -140,7 +140,7 @@ app.layout = html.Div(children=[ html.H1('US Domestic Airline Flights Performanc
 # Callback function definition
 # TASK4: Add 5 ouput components
 # Enter your code below. Make sure you have correct formatting.
-app.callback( [Output(component_id='plot1', component_property='children'),
+@app.callback( [Output(component_id='plot1', component_property='children'),
                 Output(component_id='plot2', component_property='children'),
                 Output(component_id='plot3', component_property='children'),
                 Output(component_id='plot4', component_property='children'),
